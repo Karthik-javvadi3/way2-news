@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Header from './components/Header';
+import NewsCard from './components/NewsCard';
+import { newsData } from './data/newsData';
+// import './styles/App.css';
 
-function App() {
+const App = () => {
+  const [activeTab, setActiveTab] = useState('topStories');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header activeTab={activeTab} setActiveTab={setActiveTab} />
+      <main className="main-content">
+        <div className="news-container">
+          {newsData[activeTab].map((news) => (
+            <NewsCard key={news.id} news={news} />
+          ))}
+        </div>
+      </main>
     </div>
   );
-}
+};
 
 export default App;
